@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)http://imp.nextmedia.com/nxtu.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"></head><body>
+
+<script type="text/javascript">
+
+!function(){var n="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".split("");Math.uuid=function(){for(var r,t=n,a=new Date,e=new Array(36),i=0,o=0;36>o;o++)0==o?e[0]=a.getTime()/1e3:8==o||13==o||18==o||23==o?e[o]="-":14==o?e[o]="4":(2>=i&&(i=33554432+16777216*Math.random()|0),r=15&i,i>>=4,e[o]=t[19==o?3&r|8:r]);return e.join("")}}();
+
+
+
+function createCookie(name,value,days,domain_name) {
+  if (days==0) {
+	var exps="";
+  }else if(days){
+	var dt = new Date();dt.setTime(dt.getTime()+(days*24*60*60*1000));var exps=";expires="+dt.toGMTString();
+  }else{
+	var dt = new Date(2037, 12, 31, 23, 23, 59);dt.setTime(dt.getTime());var exps=";expires="+dt.toGMTString();
+  }
+  document.cookie=name+"="+value+exps+"; path=/; domain=.nextmedia.com;";
+};
+
+function readCookie(name) {
+	var nameEQ = name + "=";
+	//console.log(document.cookie);
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+};
+
+(function(){
+
+    //allowed domains
+    var whitelist = ["nextmedia.com","appledaily.com","appledaily.com.tw","sharpdaily.tw","eat-travel.com","video.nxtomo","tomonews","suddenplus.com","health.next","nextcar.next","nextmag.com","nextmagazine.com","nextmobile","meclub.hk","nextdigital.com.hk","twnextdigital.com"];
+
+
+    function verifyOrigin(origin){
+
+        var domain = origin.replace(/^https?:\/\/|:\d{1,4}$/g, "").toLowerCase();
+        //var i = 0,
+        //    len = whitelist.length;
+        //while(i < len){if (whitelist[i] == domain){return true;}i++;}
+        var re = new RegExp(whitelist.join("|"), "i");
+		if(origin.match(re) != null){return true;}
+
+        return false;
+    }
+
+    function handleRequest(event){
+
+       if (verifyOrigin(event.origin)){
+           var data = JSON.parse(event.data);
+           var local_support=false;
+           var value;
+           try{
+             value = localStorage.getItem(data.key);
+             local_value=value;
+             local_support=true;
+           } catch(e) {
+             value = readCookie(data.key);
+           }
+           
+
+          if(data.key === 'nxtu'){
+
+           if(value==null){
+             var uuid = Math.uuid();
+             if(local_support==true){
+               localStorage.setItem(data.key,uuid);
+               createCookie(data.key,uuid,3650);
+             }else{
+               createCookie(data.key,uuid,3650);
+             }
+             value=uuid;
+           }
+
+           event.source.postMessage(JSON.stringify({id: data.id, key:data.key, value: value}), event.origin);
+         }
+
+       }
+    }
+
+    if(window.addEventListener){
+        window.addEventListener("message", handleRequest, false);
+    } else if (window.attachEvent){
+        window.attachEvent("onmessage", handleRequest);
+    }
+})();
+</script>
+
+
+
+</body></html>
