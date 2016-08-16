@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Serviceworkertest by kevinsin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Serviceworkertest</h1>
+      <h2 class="project-tagline">to test how SW works</h2>
+      <a href="https://github.com/kevinsin/serviceworkertest" class="btn">View on GitHub</a>
+      <a href="https://github.com/kevinsin/serviceworkertest/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/kevinsin/serviceworkertest/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <p></p>
+        
+          
+          
+          
+          
+        
+        
+        蘋果日報-首頁
+        
+          
+          
+          
+          
+          
+          <br>
+        
+        
+        
+        
+        
+        
+
+<pre><code>    &lt;!--[if IE]&gt;
+    &lt;link rel="stylesheet" type="text/css" href="http://static1.nextmedia.com/hkm/css/style_ie.css" /&gt;
+    &lt;![endif]--&gt; 
+
+    &lt;!--&lt;script src="http://hk.ndx.nextmedia.com/DFA/Init.js" type="text/javascript"&gt;&lt;/script&gt;--&gt;
+    &lt;!--&lt;script type="text/javascript" src="/js/jquery-1.10.2.min.js"&gt;&lt;/script&gt;--&gt;
+    &lt;script async="" src="./files/beacon.js"&gt;&lt;/script&gt;
+    &lt;script async="" type="text/javascript" src="./files/gpt.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" src="./files/jquery-1.7.2.min.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" src="./files/gpt(1).js"&gt;&lt;/script&gt;
+    &lt;script src="./files/gpt.js"&gt;&lt;/script&gt;
+    &lt;script id="gpt-impl-0.3343277395628723" src="./files/pubads_impl_92.js"&gt;&lt;/script&gt;
+    &lt;link rel="prefetch" href="http://tpc.googlesyndication.com/safeframe/1-0-4/html/container.html"&gt;
+    &lt;script type="text/javascript" src="./files/configuration-3.1.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" src="./files/flowplayer-3.2.13.mod.min.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" src="./files/flowplayer.con-3.1.0.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" src="./files/videoplayerlogger-1.0.1.min.js"&gt;&lt;/script&gt;
+    &lt;!--&lt;script type="text/javascript" src="/flowplayer/js/flowplayer.con.3.0.5.js?v=20160126"&gt;&lt;/script&gt;--&gt;
+
+    &lt;!--&lt;script type="text/javascript" src="http://staticlayout.apple.nextmedia.com/videoplayer/conf/configuration-2.4.0.js?v=2.4.0"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" src="http://hk.adx.nextmedia.com/uvp/js/flowplayer-3.2.11.mod.min.js?v=20131107"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" src="http://hk.adx.nextmedia.com/uvp/js/flowplayer.con-3.1.0.js?v=20160126"&gt;&lt;/script&gt;--&gt;
+
+
+    &lt;!-- NGS logging --&gt;
+    &lt;script type="text/javascript" language="javascript" src="./files/fingerprint.min.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" language="javascript" src="./files/jquery.cookie.min.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" language="javascript" src="./files/json2.min.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" language="javascript" src="./files/ngs_logging.min.js"&gt;&lt;/script&gt;
+
+    &lt;!-- nxm1x1 --&gt;
+    &lt;script type="text/javascript" src="./files/nxm_tr_v16.js"&gt;&lt;/script&gt;
+
+    &lt;!-- jQuery plug-in --&gt;
+    &lt;script type="text/javascript" src="./files/jquery.cookie.min.js"&gt;&lt;/script&gt;
+
+
+
+
+    &lt;style id="geo-style"&gt;html:not(.country-hk) .visible-country-hk { display: none!important }
+</code></pre>
+
+<p>html:not(.country-us) .visible-country-us { display: none!important }
+html:not(.state-ny) .visible-state-ny { display: none!important }
+html:not(.state-ca) .visible-state-ca { display: none!important }
+html:not(.district-501) .visible-district-501 { display: none!important }
+html:not(.district-803) .visible-district-803 { display: none!important }
+html:not(.district-807) .visible-district-807 { display: none!important }</p>
+
+<pre><code>    &lt;!-- 1x1 pageview --&gt;
+    &lt;script type="text/javascript"&gt;
+    $(document).ready(function() {
+            var ngs_id = nxmTrack.readCookie('ngs_id');
+            if (ngs_id == null)
+                ngs_id = '';
+            nxmTrack.nxmAddSeg('NGSID=' + ngs_id);
+
+            if($.cookie("googtrans") == '/zh-CN/zh-TW')
+            {
+                nxmTrack.nxmAddSeg('L=TC');
+            }
+            else if($.cookie("googtrans") == '/zh-CN/zh-CN')
+            {
+                nxmTrack.nxmAddSeg('L=SC');
+            }
+            else
+            {
+                nxmTrack.nxmAddSeg('L=TC');
+            }
+
+            nxmTrack.nxmAddSeg("REGION=HK");
+</code></pre>
+
+<p>nxmTrack.nxmAddSeg("PROD=ADAILY");
+nxmTrack.nxmAddSeg("AUTH=");
+nxmTrack.nxmAddSeg("SRC=AD");
+nxmTrack.nxmAddSeg("SITE=hkm.appledaily.com");
+nxmTrack.nxmAddSeg("CH=NEWS");
+nxmTrack.nxmAddSeg("SECTION=HOMEPAGE");
+nxmTrack.nxmAddSeg("SUBSECT=");
+nxmTrack.nxmAddSeg("CAT=HOMEPAGE");
+nxmTrack.nxmAddSeg("NEWS=");
+nxmTrack.nxmAddSeg("SUBSUBSECT=");
+nxmTrack.nxmAddSeg("MENU=主頁");
+nxmTrack.nxmAddSeg("ISSUEID=");
+nxmTrack.nxmAddSeg("MEDIA=TEXT");
+nxmTrack.nxmAddSeg("CONTENT=HOME");
+nxmTrack.nxmAddSeg("CID=");
+nxmTrack.nxmAddSeg("TITLE=");
+nxmTrack.nxmAddSeg("EDM=");
+nxmTrack.nxmAddSeg("ACTION=pageview");
+nxmTrack.nxmAddSeg("KY=");
+nxmTrack.nxmAddSeg("PLATFORM=MOBWEB");</p>
+
+<pre><code>            nxmTrack.nxmSendPageDepth(0, new Date().getTime());             
+            //Scroll up/down tracking depth
+            var trackRecords = [];
+            $(window).scroll(function() {
+                var scrollPercent = getPageScrollPercent();
+                if (scrollPercent &gt;= 25 &amp;&amp; trackRecords.indexOf("25") == -1) {
+                    trackRecords.push("25");
+                    nxmTrack.nxmSendPageDepth(25, new Date().getTime());
+                } else if (scrollPercent &gt;= 50 &amp;&amp; trackRecords.indexOf("50") == -1) {
+                    trackRecords.push("50");
+                    nxmTrack.nxmSendPageDepth(50, new Date().getTime());
+                } else if (scrollPercent &gt;= 75 &amp;&amp; trackRecords.indexOf("75") == -1) {
+                    trackRecords.push("75");
+                    nxmTrack.nxmSendPageDepth(75, new Date().getTime());
+                } else if (scrollPercent == 100 &amp;&amp; trackRecords.indexOf("100") == -1) {
+                    trackRecords.push("100");
+                    nxmTrack.nxmSendPageDepth(100, new Date().getTime());
+                }
+            });
+
+            function getPageScrollPercent() {
+                var bottom = $(window).height() + $(window).scrollTop();
+                var height = $(document).height();
+                return Math.round(100 * bottom / height);
+            }
+
+    });
+
+    &lt;/script&gt;
+    &lt;!-- end of nxm1x1 --&gt;
+
+    &lt;!-- Begin comScore Tag --&gt;
+    &lt;script&gt;
+      var _comscore = _comscore || [];
+      _comscore.push({ c1: "2", c2: "8028476" });
+      (function() {
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+      })();
+    &lt;/script&gt;
+    &lt;noscript&gt;
+      &amp;lt;img src="http://b.scorecardresearch.com/p?c1=2&amp;amp;c2=8028476&amp;amp;cv=2.0&amp;amp;cj=1" /&amp;gt;
+    &lt;/noscript&gt;
+    &lt;!-- End comScore Tag --&gt;
+
+&lt;/head&gt;
+</code></pre>
+
+<p></p>
+
+<div>
+    2016年8月10日
+    
+    <div></div>
+    
+
+
+
+            <div id="location-select">
+                
+                .target-locale { background-color: #fff; border-left: 1px solid #d3d3d4; border-top: 1px solid #d3d3d4; border-bottom: 1px solid #d3d3d4; border-right: 1px solid #d3d3d4; font-size: 10pt; display: inline-block; padding-top: 1px; padding-bottom: 2px; cursor: pointer; zoom: 1; font-weight: bold; cursor: pointer }
+                .target-locale-gadget { font-family: arial; font-size: 11px; color: #666; white-space: nowrap; position: relative; }
+                .goog-te-menu-value span { text-decoration: none }
+                .target-locale-gadget img { vertical-align: middle; border: none }
+                #location-picker {
+                    box-shadow: 0 3px 8px 2px #999999;
+                    position: absolute; width: 100%; background: white; top: 100%; z-index: 9999;
+                    padding: 4px; box-sizing: border-box;
+                    font-weight: bold; border: 1px solid #6b90da;
+                    display: none;
+                }
+                #location-picker.visible { display: block }
+                #location-picker &gt; div { padding: 4px; font-size: 13.33333px }
+                #location-picker .title { padding: 4px; height: 15px; color: black; }
+                #location-picker .option { color: #0000cc; background-color: white; padding: 4px; height: 15px; cursor: pointer }
+                #location-picker .option:hover { color: white; background-color: #3366cc }
+                
+                <div dir="ltr">
+                    <div>
+                        <img src="./files/cleardot.gif">
+                        
+                            
+                                地區新聞
+                                <img src="./files/cleardot.gif" width="1" height="1">
+                                ​
+                                
+                                ▼
+                            
+                        
+                    </div>
+
+                    <div id="location-picker">
+                        <div>› 選擇地區</div>
+                        <div>三藩市</div>
+                        <div>紐約</div>
+                        <div>洛杉磯</div>
+                        <div>其他美國地區</div>
+                    </div>
+
+                </div>
+                
+            </div>
+            
+
+
+    
+ 
+ #google_translate_element_2 {
+
+    position: absolute;
+    top: 46px;
+    left: 150px;
+}
+
+
+ 
+ <div id="google_translate_element_2">
+ 
+ </div>
+ 
+
+</div>
+
+<div>
+    <a href="http://hkm.appledaily.com/detail.php?category_guid=4104&amp;guid=19730468">
+    <img src="./files/head_4104.jpg"></a>
+    <ul>
+    
+        <li><a href="http://hkm.appledaily.com/list.php?category_guid=9999807&amp;category=instant">三藩市</a></li>
+        <li><a href="http://hkm.appledaily.com/list.php?category_guid=9999803&amp;category=instant">洛杉磯</a></li>
+        <li><a href="http://hkm.appledaily.com/list.php?category_guid=9999501&amp;category=instant">紐  約</a></li>
+        <li><a href="http://hkm.appledaily.com/list.php?category_guid=9999234&amp;category=instant">美  國</a></li>
+        <li><a href="http://hkm.appledaily.com/list.php?category_guid=6996647&amp;category=instant">即時新聞</a></li>
+        <li><a href="http://hkm.appledaily.com/list.php?category_guid=4104&amp;category=daily">要聞港聞</a></li>
+        <li><a href="http://hkm.appledaily.com/actionnews.php?category_guid=&amp;category=act">動新聞</a></li>
+        <li><a href="http://hkm.appledaily.com/list.php?category_guid=15335&amp;category=daily">兩岸國際</a></li>
+        <li><a href="http://hkm.appledaily.com/list.php?category_guid=15307&amp;category=daily">財  經</a></li>
+        <li><a href="http://hkm.appledaily.com/list.php?category_guid=462&amp;category=daily">娛  樂</a></li>
+        <li><a href="http://hkm.appledaily.com/list.php?category_guid=25391&amp;category=daily">體  育</a></li>
+    <li><a href="http://hkm.appledaily.com/list.php?category_guid=vice&amp;category=daily">果  籽</a></li>
+        <li><a href="http://hkm.appledaily.com/list.php?category_guid=16632792&amp;category=daily">壹週刊</a></li>
+        <li><a href="http://hkm.appledaily.com/list.php?category_guid=16632793&amp;category=daily">飲食男女</a></li>
+        <li><a href="http://hkm.appledaily.com/list.php?category_guid=16632795&amp;category=daily">Ketchup</a></li>
+
+    
+    </ul>
+</div>
+
+<div>
+    <ul>
+        <li><a href="http://hk.apple.nextmedia.com/">桌面版</a></li>
+        <li><a href="http://hk.apple.nextmedia.com/mobile/hkm.html">使用說明</a></li>
+        <li><a href="http://www.nextdigital.com.hk/info/tnc.html">使用條款</a></li>
+        <li><a href="http://www.nextdigital.com.hk/info/contactus.html">聯絡我們</a></li>
+        
+    </ul>
+
+    <a href="http://www.nextdigital.com.hk/investor"><div></div></a>
+    <p>©2016 AD Internet Limited.<br>All rights reserved. 版權所有 不得轉載</p>
+</div>
+
+
+
+<div id="nxm_iframeDiv"></div>
+
+<div id="nxm_vtrk_iframeDiv"></div>
+
+<p></p>&lt;img src="<a href="http://imp.nextmedia.com/1x1.gif?REGION=HK&amp;amp;PROD=ADAILY&amp;amp;AUTH=&amp;amp;SRC=AD&amp;amp;SITE=hkm.appledaily.com&amp;amp;CH=NEWS&amp;amp;SECTION=HOMEPAGE&amp;amp;SUBSECT=&amp;amp;CAT=HOMEPAGE&amp;amp;NEWS=&amp;amp;SUBSUBSECT=&amp;amp;MENU=%E4%B8%BB%E9%A0%81&amp;amp;ISSUEID=&amp;amp;MEDIA=TEXT&amp;amp;CONTENT=HOME&amp;amp;CID=&amp;amp;TITLE=&amp;amp;EDM=&amp;amp;ACTION=pageview&amp;amp;KY=&amp;amp;PLATFORM=MOBWEB%22/">http://imp.nextmedia.com/1x1.gif?REGION=HK&amp;amp;PROD=ADAILY&amp;amp;AUTH=&amp;amp;SRC=AD&amp;amp;SITE=hkm.appledaily.com&amp;amp;CH=NEWS&amp;amp;SECTION=HOMEPAGE&amp;amp;SUBSECT=&amp;amp;CAT=HOMEPAGE&amp;amp;NEWS=&amp;amp;SUBSUBSECT=&amp;amp;MENU=%E4%B8%BB%E9%A0%81&amp;amp;ISSUEID=&amp;amp;MEDIA=TEXT&amp;amp;CONTENT=HOME&amp;amp;CID=&amp;amp;TITLE=&amp;amp;EDM=&amp;amp;ACTION=pageview&amp;amp;KY=&amp;amp;PLATFORM=MOBWEB"/</a>&gt;&lt;!-- end nxm1x1 --&gt;
+
+
+
+
+
+<div id="nxm_iframeDiv"></div>
+
+
+
+
+
+<div id="geoDebug">
+    
+</div>
+
+
+
+
+
+
+<p></p><div></div>
+  
+
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/kevinsin/serviceworkertest">Serviceworkertest</a> is maintained by <a href="https://github.com/kevinsin">kevinsin</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
